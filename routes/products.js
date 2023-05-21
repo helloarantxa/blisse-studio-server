@@ -1,16 +1,35 @@
 var express = require('express');
 var router = express.Router();
-const Product = require('../models/Product')
+const Product = require('../models/Product');
 
-// Create product
-router.post('/', async (req, res, next) => {
-  try {
-    const product = await Product.create(req.body);
-    res.status(201).json(product);
-  } catch (err) {
-    next(err);
-  }
+router.post('/products', (req, res) => {
+  const { name, description, price, imageUrl } = req.body;
+
+  Product.create({
+    name,
+    description,
+    price,
+    imageUrl,
+  })
+    .then((createdProduct) => {
+      res.status(201).json(createdProduct);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: 'Failed to create product' });
+    });
 });
 
+// Get All Products
+router.get('/products', (req, res) => {
+  Product.find()
+    .then((products) => {
+      res.status(200).json(products);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: 'Failed to fetch products' });
+    });
+});
 
 module.exports = router;

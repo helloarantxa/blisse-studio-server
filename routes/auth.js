@@ -11,6 +11,7 @@ const isAuthenticated = require("../middleware/isAuthenticated");
 router.post("/signup", (req, res, next) => {
   const { username, email, password } = req.body;
 console.log(req.body)
+
   // Check if the email or password or name is provided as an empty string
   if (email === "" || password === "" || username === "") {
     res.status(400).json({ message: "Provide email, password and name" });
