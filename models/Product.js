@@ -1,7 +1,8 @@
-const { model, Schema } = require("mongoose");
+const mongoose = require("mongoose");
 
-const productSchema = new Schema(
-{
+const { Schema, model } = mongoose;
+
+const productSchema = new Schema({
   name: {
     type: String,
     required: [true, "Name is required."],
@@ -22,12 +23,14 @@ const productSchema = new Schema(
     required: [true, "Image is required."],
     trim: true,
   },
-  owner: {type: mongoose.Schema.Types.ObjectId,
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
-  reviews: [{type: mongoose.Schema.Types.ObjectId,
+  reviews: [{
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Review',
-}]
+  }]
 });
 
 module.exports = model("Product", productSchema);

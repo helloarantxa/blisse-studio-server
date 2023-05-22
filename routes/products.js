@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 const Product = require('../models/Product');
 
-router.post('/products', (req, res) => {
+router.post('/new-product', (req, res) => {
+  console.log('line7')
   const { name, description, price, imageUrl } = req.body;
 
   Product.create({
@@ -21,8 +22,9 @@ router.post('/products', (req, res) => {
 });
 
 // Get All Products
-router.get('/products', (req, res) => {
+router.get('/all-products', (req, res) => {
   Product.find()
+    .populate('owner')
     .then((products) => {
       res.status(200).json(products);
     })
