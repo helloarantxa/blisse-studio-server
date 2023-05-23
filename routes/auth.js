@@ -73,23 +73,19 @@ router.post("/login", (req, res, next) => {
         return;
       }
 
-      // Compare the provided password with the one saved in the database
       const passwordCorrect = bcrypt.compareSync(password, foundUser.passwordHash);
 
       if (passwordCorrect) {
-        // Deconstruct the user object to omit the password
+
         const { _id, email, username, isAdmin } = foundUser;
 
-        // Create an object that will be set as the token payload
         const payload = { _id, email, username, isAdmin };
 
-        // Create and sign the token
         const authToken = jwt.sign(payload, process.env.SECRET, {
           algorithm: "HS256",
           expiresIn: "6h",
         });
 
-        // Send the token as the response
         res.status(200).json({ authToken: authToken, user: payload });
       } else {
         res.status(401).json({ message: "Unable to authenticate the user" });
