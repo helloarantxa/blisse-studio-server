@@ -30,6 +30,8 @@ const userSchema = new Schema(
       type: Boolean,
       default: false
     },
+    connectCards:[{type: Schema.Types.ObjectId, ref: 'ConnectForm'}],
+
     createdAt: {
       type: Date,
       default: Date.now

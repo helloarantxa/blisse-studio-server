@@ -53,7 +53,7 @@ router.get('/product-details/:id', (req, res) => {
 });
 
 // Update a product by ID
-router.put('/edit-product/:id', (req, res) => {
+router.post('/edit-product/:id', (req, res) => {
   const { id } = req.params;
   const { name, description, price, imageUrl } = req.body;
 
@@ -82,7 +82,7 @@ router.put('/edit-product/:id', (req, res) => {
 
 
 // Delete a product by ID
-router.delete('/delete-product/:id', (req, res) => {
+router.get('/delete-product/:id', (req, res) => {
   const { id } = req.params;
 
   Product.findByIdAndRemove(id)

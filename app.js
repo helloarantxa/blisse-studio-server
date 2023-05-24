@@ -9,6 +9,8 @@ var usersRouter = require("./routes/users");
 var authRouter = require("./routes/auth");
 var ordersRouter = require("./routes/orders");
 var productsRouter = require("./routes/products");
+var photoRouter = require("./routes/photo")
+var connectRouter = require ("./routes/connect")
 
 var app = express();
 
@@ -31,6 +33,8 @@ app.use("/users", usersRouter);
 app.use("/auth", authRouter);
 app.use("/orders", ordersRouter);
 app.use("/products", productsRouter);
+app.use("/photo", photoRouter);
+app.use("/connect", connectRouter);
 
 // middleware
 app.use(function (err, req, res, next) {
