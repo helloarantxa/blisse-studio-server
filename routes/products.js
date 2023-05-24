@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const Product = require('../models/Product');
 
+
 // Create a new product
 router.post('/new-product', (req, res) => {
+
   const { name, description, price, imageUrl } = req.body;
 
   Product.create({
@@ -20,6 +22,7 @@ router.post('/new-product', (req, res) => {
       res.status(500).json({ error: 'Failed to create product' });
     });
 });
+
 
 // Get all products
 router.get('/all-products', (req, res) => {
@@ -68,6 +71,8 @@ router.post('/edit-product/:id', (req, res) => {
     { new: true }
   )
     .then((updatedProduct) => {
+      console.log(updatedProduct);
+
       if (!updatedProduct) {
         res.status(404).json({ error: 'Product not found' });
       } else {

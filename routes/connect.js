@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const ConnectForm = require("../models/ConnectForm");
 const User = require("../models/User");
+const isAuthenticated = require("../middleware/isAuthenticated");
 
 // Create new form
 router.post("/connectCard", (req, res) => {
@@ -42,15 +43,23 @@ router.post("/connectCard", (req, res) => {
       res.status(500).json({ error: "Failed to create form submission" });
     });
 });
-router.get("/connectCards", (req, res) => {
+router.get("/connectCards", isAuthenticated, (req, res) => {
+  console.log(req.user);
+  
+
   User.findOne({ isAdmin: true })
     .populate("connectCards")
     .then((user) => {
-      if (!user) {
-        return res.status(404).json({ error: "User not found" });
-      }
-      res.status(200).json(user.connectCards);
+      // if (!user) {
+      //   return res.status(404).json({ error: "User not found" });
+      // } 
+      if (req.user.isAdmin === true)
+      
+      {res.status(200).json(user.connectCards)};
+
+      // return res.status(404).json({ error: "User not found" })
     })
+    
     .catch((err) => {
       console.log(err);
       res.status(500).json({ error: "Failed to fetch connect cards" });
