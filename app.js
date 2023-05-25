@@ -9,8 +9,9 @@ var usersRouter = require("./routes/users");
 var authRouter = require("./routes/auth");
 var ordersRouter = require("./routes/orders");
 var productsRouter = require("./routes/products");
-var photoRouter = require("./routes/photo")
-var connectRouter = require ("./routes/connect")
+var photoRouter = require("./routes/photo");
+var connectRouter = require("./routes/connect");
+var aboutRouter = require("./routes/about");
 
 var app = express();
 
@@ -35,16 +36,17 @@ app.use("/orders", ordersRouter);
 app.use("/products", productsRouter);
 app.use("/photo", photoRouter);
 app.use("/connect", connectRouter);
+app.use("/about", aboutRouter);
 
-// middleware
+// Error handling middleware
 app.use(function (err, req, res, next) {
-  console.error(err.stack); 
-  res.status(500).send('Something broke!'); 
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
 });
 
-// routes that are not defined
+// Routes that are not defined
 app.use(function (req, res, next) {
-  res.status(404).send('Sorry, that route does not exist.');
+  res.status(404).send("Sorry, that route does not exist.");
 });
 
 mongoose
@@ -55,7 +57,7 @@ mongoose
     );
   })
   .catch((err) => {
-    console.error("Error connecting to mongo: ", err);
+    console.error("Error connecting to MongoDB: ", err);
   });
 
 module.exports = app;

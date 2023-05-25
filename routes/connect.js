@@ -43,6 +43,22 @@ router.post("/connectCard", (req, res) => {
       res.status(500).json({ error: "Failed to create form submission" });
     });
 });
+
+//DELETE CARD 
+router.post("/delete-card/:cardId", isAuthenticated, (req, res) => {
+  const cardId = req.params.cardId;
+
+  ConnectForm.findByIdAndDelete(cardId)
+    .then(() => {
+      res.status(200).json({ message: "Connect card deleted successfully" });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Failed to delete connect card" });
+    });
+});
+
+
 router.get("/connectCards", isAuthenticated, (req, res) => {
   console.log(req.user);
   
@@ -50,14 +66,10 @@ router.get("/connectCards", isAuthenticated, (req, res) => {
   User.findOne({ isAdmin: true })
     .populate("connectCards")
     .then((user) => {
-      // if (!user) {
-      //   return res.status(404).json({ error: "User not found" });
-      // } 
+     
       if (req.user.isAdmin === true)
       
       {res.status(200).json(user.connectCards)};
-
-      // return res.status(404).json({ error: "User not found" })
     })
     
     .catch((err) => {
