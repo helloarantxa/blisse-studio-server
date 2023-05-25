@@ -26,9 +26,16 @@ app.enable("trust proxy");
 
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+
+    origin: ["https://master--classy-youtiao-76affd.netlify.app"],
   })
 );
+
+// app.use(
+//   cors({
+//     origin: ["http://localhost:3000"],
+//   })
+// );
 
 app.use("/users", usersRouter);
 app.use("/auth", authRouter);

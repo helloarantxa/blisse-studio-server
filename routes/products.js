@@ -55,7 +55,7 @@ router.get('/product-details/:id', (req, res) => {
     });
 });
 
-// Update a product by ID
+// Edit/ Update a product by ID
 router.post('/edit-product/:id', (req, res) => {
   const { id } = req.params;
   const { name, description, price, imageUrl } = req.body;

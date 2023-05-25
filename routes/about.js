@@ -36,6 +36,7 @@ router.post("/about", isAuthenticated, (req, res) => {
             console.log(err);
             res.status(500).json({ error: "Failed to update about information" });
           });
+          
       } else {
 
         // creates new about information
@@ -61,5 +62,7 @@ router.post("/about", isAuthenticated, (req, res) => {
       res.status(500).json({ error: "Failed to fetch about information" });
     });
 });
+
+//
 
 module.exports = router;
