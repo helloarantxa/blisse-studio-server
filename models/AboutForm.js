@@ -5,6 +5,10 @@ const aboutFormSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  name: {
+    type: String,
+    required: true,
+  },
   information: {
     type: String,
     required: true,

@@ -17,13 +17,14 @@ router.get("/about", (req, res) => {
 
 // Submit/Update About Form
 router.post("/about", isAuthenticated, (req, res) => {
-  const { title, information, image } = req.body;
+  const { title, name, information, image } = req.body;
 
   AboutForm.findOne()
     .then((aboutInfo) => {
       if (aboutInfo) {
 
         aboutInfo.title = title;
+        aboutInfo.name = name;
         aboutInfo.information = information;
         aboutInfo.image = image;
 
@@ -42,6 +43,7 @@ router.post("/about", isAuthenticated, (req, res) => {
         // creates new about information
         const newAboutInfo = new AboutForm({
           title,
+          name,
           information,
           image,
         });
