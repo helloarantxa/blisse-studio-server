@@ -26,7 +26,7 @@ app.enable("trust proxy");
 
 app.use(
   cors({
-    origin: ["https://master--classy-youtiao-76affd.netlify.app"],
+    origin: ["https://blisse-design-studio.netlify.app"],
   })
 );
 
